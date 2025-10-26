@@ -1,12 +1,19 @@
-function beforesubmit(){
-    let outputdate = document.querySelector(".outputdate");
-    let inputdate = document.querySelector(".inputdate");
-    //en_US
-    console.log("outputdate", outputdate.value);
-    console.log("inputdate", inputdate.value);
+let capthachecked = false;
+function beforesubmit(event){
+    if(capthachecked){
+        let outputdate = document.querySelector(".outputdate");
+        let inputdate = document.querySelector(".inputdate");
+        //en_US
+        console.log("outputdate", outputdate.value);
+        console.log("inputdate", inputdate.value);
 
-    let formattedDate = new Date(inputdate.value).toLocaleDateString("en-US");
-    outputdate.value = formattedDate;
+        let formattedDate = new Date(inputdate.value).toLocaleDateString("en-US");
+        outputdate.value = formattedDate;
+    }
+    else{
+        alert("Please check the reCAPTCHA box to submit the lead");
+        event.preventDefault();
+    }
 }
 
 function timestamp() { 
@@ -18,3 +25,7 @@ function timestamp() {
     } 
 } 
 setInterval(timestamp, 500); 
+
+function capthchasuccess(){
+    capthachecked = true;
+}
